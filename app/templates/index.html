@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Quiz Application</h1>
+    <a href="{{ url_for('auth.login') }}">Login</a> | 
+    <a href="{{ url_for('auth.signup') }}">Sign Up</a> | 
+    <a href="{{ url_for('main.quiz') }}">Take Quiz</a>
+</body>
+</html>
