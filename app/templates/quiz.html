@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+</head>
+<body>
+    <h1>Quiz</h1>
+    <form method="POST" action="{{ url_for('main.submit_quiz') }}">
+        {% for question in questions %}
+            <div>
+                <p>{{ question.question }}</p>
+                <input type="radio" name="{{ question.id }}" value="{{ question.option1 }}" required> {{ question.option1 }}<br>
+                <input type="radio" name="{{ question.id }}" value="{{ question.option2 }}" required> {{ question.option2 }}<br>
+                <input type="radio" name="{{ question.id }}" value="{{ question.option3 }}" required> {{ question.option3 }}<br>
+                <input type="radio" name="{{ question.id }}" value="{{ question.option4 }}" required> {{ question.option4 }}<br>
+            </div>
+        {% endfor %}
+        <button type="submit">Submit Quiz</button>
+    </form>
+</body>
+</html>
