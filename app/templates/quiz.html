@@ -20,6 +20,105 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/lightbox.css') }}">
 
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .main-header {
+            background-color: rgba(22,34,57,0.95);
+            height: 80px;
+            position: fixed;
+            z-index: 12;
+            width: 100%;
+            top: 0;
+        }
+        .logo {
+            float: left;
+            line-height: 80px;
+            padding-left: 60px;
+        }
+        .logo a {
+            font-size: 36px;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+        }
+        .logo a em {
+            font-style: normal;
+            color: #f5a425;
+        }
+        .main-men {
+            float: right;
+            padding-right: 60px;
+        }
+        .main-men li {
+            display: inline-block;
+            line-height: 79px;
+            margin-left: 15px;
+            position: relative;
+        }
+        .main-men li a {
+            padding: 10px 15px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: #fff;
+            border: 2px solid transparent;
+            transition: all 0.5s;
+            text-decoration: none;
+        }
+        .main-men li:hover a,
+        .main-men li.active a {
+            border: 2px solid #f5a425;
+        }
+
+
+.quiz-container {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.question-block {
+  margin-bottom: 2rem;
+}
+
+.question {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.options {
+  padding-left: 1rem;
+}
+
+.form-check {
+  margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+
+    </style>
+
   </head>
 
 <body>
@@ -30,57 +129,53 @@
       <a href="/"><em>Quiz</em>Modo</a>
     </div>
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
-    <nav id="menu" class="main-nav" role="navigation">
-      <ul class="main-menu">
-        <li><a href="#section4">Admin</a></li>
-        <li class="has-submenu"><a href="#section2">API</a>
-          <ul class="sub-menu">
-            <li><a href="/api/questions">Questions API</a></li>
-            <li><a href="/api/results">Results API</a></li>
-          </ul>
-        </li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
+    <nav class="main-men">
+            <ul>
+              <li><a href="/admin">Admin</a></li>
+                  <li><a href="/api/questions">Questions API</a></li>
+                  <li><a href="/api/results">Results API</a></li>
+                
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
   </header>
 
+<br><br><br>
 
-
-  <section class="section coming-soon" data-section="section3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10">
-          <div class="right-content">
-            <div class="top-content">
-              <h6>Start Quiz: <em>Read and Answer all questions carefully.</em> Your Results will be shown once you click Submit</h6>
-            </div>
-            <form id="contact" method="POST" action="{{ url_for('main.submit_quiz') }}">
-              <div class="row">
-                {% for question in questions %}
-                <div class="col-md-12">
-                  <h6>{{ question.question }}</h6>
-                  <fieldset>
-                    <input type="radio" name="{{ question.id }}" value="{{ question.option1 }}" required> {{ question.option1 }}<br>
-                    <input type="radio" name="{{ question.id }}" value="{{ question.option2 }}" required> {{ question.option2 }}<br>
-                    <input type="radio" name="{{ question.id }}" value="{{ question.option3 }}" required> {{ question.option3 }}<br>
-                    <input type="radio" name="{{ question.id }}" value="{{ question.option4 }}" required> {{ question.option4 }}<br>
-                  </fieldset>
-                </div>
-                
-                {% endfor %}
-                
-                <div class="col-md-12">
-                  <fieldset>
-                    <button type="submit" id="form-submit" class="button">Sign Up</button>
-                  </fieldset>
-                </div>
-              </div>
-            </form>
+  <section class="section quiz" data-section="quiz">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="quiz-container">
+          <div class="quiz-header">
+            <h2>Start Quiz</h2>
+            <p class="lead">Read and answer all questions carefully. Your results will be shown once you click Submit.</p>
           </div>
+          <form method="POST" action="{{ url_for('main.submit_quiz') }}" class="quiz-form">
+            {% for question in questions %}
+            <div class="question-block">
+              <h4 class="question">{{ loop.index }}. {{ question.question }}</h4>
+              <div class="options">
+                {% for option in [question.option1, question.option2, question.option3, question.option4] %}
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ question.id }}_{{ loop.index }}" value="{{ option }}" required>
+                  <label class="form-check-label" for="{{ question.id }}_{{ loop.index }}">
+                    {{ option }}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+            <div class="text-center mt-4">
+              <button type="submit" id="form-submit" class="btn btn-primary btn-lg">Submit Quiz</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   
 

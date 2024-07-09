@@ -1,10 +1,3 @@
-/*
-    
-TemplateMo 557 Grad School
-
-https://templatemo.com/tm-557-grad-school
-
-*/
 
 
 @import url(fontawesome.css);
@@ -1591,4 +1584,17 @@ footer p a:hover {
     font-weight: 600;
     letter-spacing: 0.25px;
   }
+}
+
+/* Add styles for the dropdown menu */
+.main-menu li.has-submenu .sub-menu {
+  display: none;
+  position: absolute;
+  background-color: #18233a;
+  width: 160px;
+  z-index: 1;
+}
+
+.main-menu li.has-submenu.sub-menu {
+  display: block;
 }

@@ -20,6 +20,63 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/lightbox.css') }}">
 
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .main-header {
+            background-color: rgba(22,34,57,0.95);
+            height: 80px;
+            position: fixed;
+            z-index: 12;
+            width: 100%;
+            top: 0;
+        }
+        .logo {
+            float: left;
+            line-height: 80px;
+            padding-left: 60px;
+        }
+        .logo a {
+            font-size: 36px;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+        }
+        .logo a em {
+            font-style: normal;
+            color: #f5a425;
+        }
+        .main-men {
+            float: right;
+            padding-right: 60px;
+        }
+        .main-men li {
+            display: inline-block;
+            line-height: 79px;
+            margin-left: 15px;
+            position: relative;
+        }
+        .main-men li a {
+            padding: 10px 15px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: #fff;
+            border: 2px solid transparent;
+            transition: all 0.5s;
+            text-decoration: none;
+        }
+        .main-men li:hover a,
+        .main-men li.active a {
+            border: 2px solid #f5a425;
+        }
+    </style>
+
   </head>
 
 <body>
@@ -31,18 +88,15 @@
       <a href="/"><em>Quiz</em>Modo</a>
     </div>
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
-    <nav id="menu" class="main-nav" role="navigation">
-      <ul class="main-menu">
-        <li><a href="#section4">Admin</a></li>
-        <li class="has-submenu"><a href="#section2">API</a>
-          <ul class="sub-menu">
-            <li><a href="/api/questions">Questions API</a></li>
-            <li><a href="/api/results">Results API</a></li>
-          </ul>
-        </li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
+    <nav class="main-men">
+            <ul>
+              <li><a href="/admin">Admin</a></li>
+                  <li><a href="/api/questions">Questions API</a></li>
+                  <li><a href="/api/results">Results API</a></li>
+                
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
   </header>
 
   <!-- ***** Main Banner Area Start ***** -->
